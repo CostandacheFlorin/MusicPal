@@ -1,20 +1,28 @@
 "use client";
 import Input from "@/components/Input";
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/components/Button";
-import Dropdown from "@/components/Dropdown";
-import dynamic from "next/dynamic";
+import { Select } from "antd";
 
-// const DynamicDropdown = dynamic(
-//   async () => import("../../components/Dropdown"),
-//   { ssr: false }
-// );
+import { Radio } from "antd";
+import { useRecommendations } from "@/hooks/useRecommendations";
+import TracksSlider from "@/components/TracksSlider";
 const Recommend = () => {
-  const eventHandler = (e: string) => {
-    console.log(e);
-  };
+  const {
+    handleTrackChange,
+    handleArtistChange,
+    onChangeRadio,
+    error,
+    handleTagsChange,
+    options,
+    genres,
+    popularity,
+    submitRecommendation,
+    track,
+    artist,
+  } = useRecommendations();
   return (
-    <div className="h-screen flex flex-col bg-primary items-center">
+    <div className="h-screen  flex flex-col bg-primary items-center">
       <h2 className=" w-full p-4 text-white text-center text-2xl">
         Configure your recommendations settings
       </h2>
@@ -27,56 +35,59 @@ const Recommend = () => {
         </div>
       </div>
 
-      <div className="max-w-2xl ">
+      <div className="max-w-2xl flex flex-col gap-4 ">
         <Input
           placeholder="Track"
           labelPosition="center"
           label="Track"
-          onChange={eventHandler}
+          value={track}
+          onChange={handleTrackChange}
         />
         <Input
           placeholder="Artist"
           labelPosition="center"
           label="Artist"
-          onChange={eventHandler}
+          value={artist}
+          onChange={handleArtistChange}
         />
 
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-col justify-center items-center">
             <p className=" text-textPrimary text-center text-lg">Genres</p>
+            <Select
+              mode="tags"
+              style={{ width: "100%" }}
+              placeholder="Select tags"
+              onChange={handleTagsChange}
+              options={options}
+            />
           </div>
-
-          <p className="text-textPrimary">Current genres</p>
-          <Dropdown
-            className="mt-2"
-            options={[
-              { label: "Banana", value: "banana" },
-              { label: "Cherry", value: "cherry" },
-              { label: "Durian", value: "durian" },
-              { label: "Elderberry", value: "elderberry" },
-              { label: "Fig", value: "fig" },
-            ]}
-            onChange={eventHandler}
-            value={"banana"}
-            loading={false}
-            placeholder={"test"}
-            onClear={() => {
-              console.log("respect");
-            }}
-          />
-          <Button
-            className="bg-tertiary  rounded-md py-2  w-full text-center"
-            text="Add genre"
-            onClick={() => console.log("respect")}
-          />
         </div>
-        <p className="text-red-500 text-center p-4">Error</p>
+
+        <div className="flex flex-col gap-4  items-center ">
+          <h3 className=" text-textPrimary text-center text-lg">Popularity</h3>
+
+          <Radio.Group onChange={onChangeRadio} value={popularity}>
+            <Radio value={"high"}>High</Radio>
+            <Radio value={"medium"}>Medium</Radio>
+            <Radio value={"low"}>Low</Radio>
+          </Radio.Group>
+        </div>
+
         <Button
           className="bg-tertiary rounded-md py-2  w-full text-center"
           text="Search"
-          onClick={() => console.log("respect")}
+          onClick={submitRecommendation}
         />
       </div>
+      {/* <iframe
+        width={700}
+        height={300}
+        frameBorder={0}
+        src="https://open.spotify.com/embed/track/0c6xIDDpzE81m2q797ordA"
+      /> */}
+      <TracksSlider />
+      {error && <p className="text-red-500 text-center p-4">{error}</p>}
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Input: React.FC<InputProps> = ({
         </label>
       )}
       <input
-        className="bg-[#3c3f43] text-textPrimary	 appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight"
+        className="bg-[#3c3f43] text-textPrimary	 appearance-none border rounded-md w-full py-2 px-3 leading-tight"
         type={type}
         placeholder={placeholder}
         value={value}

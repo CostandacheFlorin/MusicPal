@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Navigation = () => {
   return (
-    <nav className="p-4 bg-primary border-b border-white flex justify-between">
+    <nav className="p-4 w-full bg-primary border-b border-white flex justify-between">
       <div className=" ml-4 text-white">Logo</div>
       <ul className="text-white text-bold  flex gap-4 justify-end">
         <Link href="/recommend">

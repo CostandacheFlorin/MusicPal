@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.ant-select-selector {
+  background-color: #3c3f43 !important;
+}
+
+.ant-select-selection-placeholder {
+  color: #ffffff !important;
+}
+
+.ant-select-selection-item {
+  background-color: #ffffff !important;
+  color: #3c3f43;
+}
+
+.ant-radio-wrapper > span {
+  color: #ffffff !important;
+}
