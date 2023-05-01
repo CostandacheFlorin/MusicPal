@@ -18,7 +18,7 @@ const TracksSlider: React.FC<TracksSliderProps> = ({
     <Swiper
       navigation={true}
       modules={[Navigation]}
-      className="max-w-[90vw] my-8"
+      className="max-w-[90vw] my-8 flex items-center justify-center"
     >
       {tracksIds.map((track, index) => (
         <SwiperSlide key={track} className="flex items-center justify-center">

@@ -8,7 +8,7 @@ const Navigation = () => {
         <Link href="/recommend">
           <div className="hover:text-tertiary">Recommendations</div>
         </Link>
-        <Link href="/about">
+        <Link href="/discover">
           <div className="hover:text-tertiary">Discover</div>
         </Link>
         <Link href="/contact">
