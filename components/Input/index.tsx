@@ -9,6 +9,8 @@ interface InputProps {
   onChange: (event: string) => void;
   required?: boolean;
   label?: string;
+  error?: boolean;
+  errorMessage?: string;
   labelPosition?: "center" | "left" | "right" | "start" | "end" | "justify";
 }
 
@@ -20,6 +22,8 @@ const Input: React.FC<InputProps> = ({
   onChange,
   required,
   label,
+  error,
+  errorMessage,
 }) => {
   return (
     <div className="mb-4">
@@ -34,7 +38,9 @@ const Input: React.FC<InputProps> = ({
         </label>
       )}
       <input
-        className="bg-[#3c3f43] text-textPrimary	 appearance-none border rounded-md w-full py-2 px-3 leading-tight"
+        className={`bg-[#3c3f43] text-textPrimary	 appearance-none border rounded-md w-full py-2 px-3 leading-tight ${
+          error ? "border-red-500" : ""
+        }`}
         type={type}
         placeholder={placeholder}
         value={value}
@@ -44,6 +50,9 @@ const Input: React.FC<InputProps> = ({
         required={required}
         id={label}
       />
+      {error ? (
+        <p className="text-red-500 text-center pt-2">{errorMessage}</p>
+      ) : null}
     </div>
   );
 };

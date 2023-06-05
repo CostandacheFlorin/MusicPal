@@ -7,6 +7,8 @@ import { Select } from "antd";
 import { Radio } from "antd";
 import { useRecommendations } from "@/hooks/useRecommendations";
 import TracksSlider from "@/components/TracksSlider";
+import AddTracks from "@/components/AddTracks";
+import AddArtists from "@/components/AddArtists";
 const Recommend = () => {
   const {
     handleTrackChange,
@@ -36,21 +38,8 @@ const Recommend = () => {
       </div>
 
       <div className="max-w-2xl flex flex-col gap-4 ">
-        <Input
-          placeholder="Track"
-          labelPosition="center"
-          label="Track"
-          value={track}
-          onChange={handleTrackChange}
-        />
-        <Input
-          placeholder="Artist"
-          labelPosition="center"
-          label="Artist"
-          value={artist}
-          onChange={handleArtistChange}
-        />
-
+        <AddTracks />
+        <AddArtists />
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-col justify-center items-center">
             <p className=" text-textPrimary text-center text-lg">Genres</p>
@@ -75,18 +64,13 @@ const Recommend = () => {
         </div>
 
         <Button
-          className="bg-tertiary rounded-md py-2  w-full text-center"
-          text="Search"
+          className="bg-tertiary rounded-md py-2 text-bold  w-full text-center"
+          text="Save settings"
           onClick={submitRecommendation}
         />
       </div>
-      {/* <iframe
-        width={700}
-        height={300}
-        frameBorder={0}
-        src="https://open.spotify.com/embed/track/0c6xIDDpzE81m2q797ordA"
-      /> */}
-      <TracksSlider />
+
+      {/* <TracksSlider /> */}
       {error && <p className="text-red-500 text-center p-4">{error}</p>}
     </div>
   );

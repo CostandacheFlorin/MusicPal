@@ -11,6 +11,7 @@ export const useRecommendations = () => {
   const [numberOfSeedsLeft, setNumberOfSeedsLeft] = useState(5);
   const [seedsNumber, setSeedsNumber] = useState(0);
 
+  // TODO: de sters useEffect
   useEffect(() => {
     let number = 0;
     if (track) {
