@@ -2,61 +2,53 @@ import { useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
 import ArtistInfo from "../ArtistInfo";
-
-interface BasicArtist {
-  artistName: string;
-  image: string;
-  id: string;
-}
+import { useQuery } from "react-query";
+import { getArtistInfo } from "@/actions/search.action";
+import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
 
 const AddArtists = () => {
-  const [artists, setArtists] = useState<BasicArtist[]>([]);
-  const [artistName, setArtistName] = useState<string>("");
-  const [errors, setErrors] = useState({ artistName: false });
-
-  const addArtistHandler = () => {
-    if (artistName.trim() === "") {
-      setErrors({ ...errors, artistName: true });
-      return;
-    }
-    setArtists([
-      ...artists,
-      {
-        id: `asd- ${Math.floor(Math.random() * 1000) + 1}`,
-        artistName,
-        image:
-          "https://i.scdn.co/image/ab67616d0000b2736f8adbba8e95f3cc81209183",
-      },
-    ]);
-    setArtistName("");
-    setErrors({ ...errors, artistName: false });
-  };
+  const {
+    artists,
+    removeArtistHandler,
+    fetchingErrors,
+    artistSeedName,
+    setArtistSeedName,
+    addArtistHandler,
+  } = useRecommendationsConfig();
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <p className="mb-2 text-textPrimary pl-3 font-bold text-center text-lg">
         Artists
       </p>
-
-      {artists.map((artist) => (
-        <ArtistInfo
-          key={artist.id}
-          artist={artist.artistName}
-          image={artist.image}
-        />
-      ))}
+      <div className="flex gap-4 flex-wrap items-center justify-center">
+        {artists.map((artist) => (
+          <ArtistInfo
+            key={artist.id}
+            artist={artist.artistName}
+            image={artist.image}
+            footerContent={
+              <Button
+                className="bg-[#FF0000]  rounded-md p-3  mt-2  text-center"
+                text="Remove artist"
+                onClick={() => removeArtistHandler(artist.id)}
+              />
+            }
+          />
+        ))}
+      </div>
 
       <Input
         placeholder="Artist name"
         labelPosition="center"
         label="Artist name"
-        error={errors.artistName}
-        errorMessage="Please provide an artist name"
-        value={artistName}
-        onChange={setArtistName}
+        error={fetchingErrors.getArtist.hasError}
+        errorMessage={fetchingErrors.getArtist.errorMessage}
+        value={artistSeedName}
+        onChange={setArtistSeedName}
       />
       <Button
-        className="bg-tertiary rounded-md py-2  w-full text-center"
+        className="bg-tertiary w-[200px] rounded-md py-2  w-full text-center"
         text="Add artist"
         onClick={addArtistHandler}
       />

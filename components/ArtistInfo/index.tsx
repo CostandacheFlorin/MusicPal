@@ -3,6 +3,7 @@ interface ArtistInfoProps {
   image: string;
   imageWidth?: number;
   imageHeight?: number;
+  footerContent?: React.ReactNode;
 }
 
 const ArtistInfo: React.FC<ArtistInfoProps> = ({
@@ -10,12 +11,23 @@ const ArtistInfo: React.FC<ArtistInfoProps> = ({
   image,
   imageWidth = 150,
   imageHeight = 150,
+  footerContent,
 }) => {
   return (
-    <div className="flex justify-center gap-3 items-center">
-      <img src={image} width={imageWidth} height={imageHeight} />
-      <div className="flex flex-col w-[150px]">
-        <p className="text-textPrimary font-bold text-center py-2">{artist}</p>
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-center gap-3 items-center">
+        <img
+          className="rounded-full"
+          src={image}
+          width={imageWidth}
+          height={imageHeight}
+        />
+        <div className="flex flex-col w-[150px]">
+          <p className="text-textPrimary font-bold text-center py-2">
+            {artist}
+          </p>
+          {footerContent}
+        </div>
       </div>
     </div>
   );

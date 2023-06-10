@@ -13,6 +13,8 @@
 .ant-select-selection-item {
   background-color: #ffffff !important;
   color: #3c3f43;
+  font-size: 20px;
+  height: 40px;
 }
 
 .ant-radio-wrapper > span {

@@ -1,30 +1,24 @@
 "use client";
-import Input from "@/components/Input";
-import React, { useState } from "react";
+import React from "react";
 import Button from "@/components/Button";
 import { Select } from "antd";
 
 import { Radio } from "antd";
-import { useRecommendations } from "@/hooks/useRecommendations";
-import TracksSlider from "@/components/TracksSlider";
+import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
 import AddTracks from "@/components/AddTracks";
 import AddArtists from "@/components/AddArtists";
 const Recommend = () => {
   const {
-    handleTrackChange,
-    handleArtistChange,
     onChangeRadio,
-    error,
+    genresOptions,
     handleTagsChange,
-    options,
     genres,
     popularity,
     submitRecommendation,
-    track,
-    artist,
-  } = useRecommendations();
+    fetchingErrors,
+  } = useRecommendationsConfig();
   return (
-    <div className="h-screen  flex flex-col bg-primary items-center">
+    <div className="min-h-[100vh] h-full flex flex-col bg-primary items-center">
       <h2 className=" w-full p-4 text-white text-center text-2xl">
         Configure your recommendations settings
       </h2>
@@ -37,7 +31,7 @@ const Recommend = () => {
         </div>
       </div>
 
-      <div className="max-w-2xl flex flex-col gap-4 ">
+      <div className="w-full flex flex-col gap-4 items-center justify-center ">
         <AddTracks />
         <AddArtists />
         <div className="flex flex-col gap-4 ">
@@ -45,10 +39,11 @@ const Recommend = () => {
             <p className=" text-textPrimary text-center text-lg">Genres</p>
             <Select
               mode="tags"
-              style={{ width: "100%" }}
+              className="max-w-[100%]"
               placeholder="Select tags"
               onChange={handleTagsChange}
-              options={options}
+              options={genresOptions}
+              value={genres}
             />
           </div>
         </div>
@@ -64,14 +59,17 @@ const Recommend = () => {
         </div>
 
         <Button
-          className="bg-tertiary rounded-md py-2 text-bold  w-full text-center"
+          className="bg-tertiary rounded-md w-[200px] py-2 text-bold  w-full text-center"
           text="Save settings"
           onClick={submitRecommendation}
         />
-      </div>
 
-      {/* <TracksSlider /> */}
-      {error && <p className="text-red-500 text-center p-4">{error}</p>}
+        {fetchingErrors.setRecommendationsSettings.hasError ? (
+          <p className="text-red-500 text-center py-4">
+            {fetchingErrors.setRecommendationsSettings.errorMessage}
+          </p>
+        ) : null}
+      </div>
     </div>
   );
 };
