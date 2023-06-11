@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Inter } from "next/font/google";
 import QueryProvider from "@/components/QueryProvider";
+import RecommendationProvider from "@/providers/RecommendationProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider>
-          <Navigation />
-          {children}
-        </QueryProvider>
+        <RecommendationProvider>
+          <QueryProvider>
+            <Navigation />
+            {children}
+          </QueryProvider>
+        </RecommendationProvider>
       </body>
     </html>
   );

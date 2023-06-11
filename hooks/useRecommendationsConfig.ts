@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { getGenresList } from "@/actions/utils.action";
 import { convertToDropdownOptions } from "@/helpers";
 import { getArtistInfo, getTrackInfo } from "@/actions/search.action";
+import { useRecommendationContext } from "@/providers/RecommendationContext";
 interface BasicTrack {
   id: string;
   trackName: string;
@@ -36,6 +37,10 @@ export const useRecommendationsConfig = () => {
   const [genresOptions, setGenresOptions] = useState<DefaultOptionType[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [popularity, setPopularity] = useState("");
+
+  const { recommendationSettings, setRecommendationSettings } =
+    useRecommendationContext();
+  console.log(recommendationSettings);
 
   const { error: genresFetchingError, refetch: refetchGenres } = useQuery(
     "getGenresList",
