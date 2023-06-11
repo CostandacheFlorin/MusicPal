@@ -39,7 +39,7 @@ const Recommend = () => {
             <p className=" text-textPrimary text-center text-lg">Genres</p>
             <Select
               mode="tags"
-              className="max-w-[100%]"
+              className="max-w-[100%] min-w-[200px]"
               placeholder="Select tags"
               onChange={handleTagsChange}
               options={genresOptions}
@@ -59,7 +59,7 @@ const Recommend = () => {
         </div>
 
         <Button
-          className="bg-tertiary rounded-md w-[200px] py-2 text-bold  w-full text-center"
+          className="bg-tertiary rounded-md !w-[200px] py-2 text-bold  w-full text-center"
           text="Save settings"
           onClick={submitRecommendation}
         />

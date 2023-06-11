@@ -21,20 +21,15 @@ const AddTracks = () => {
       <p className="mb-2 text-textPrimary text-lg font-bold pl-3 text-center">
         Tracks
       </p>
-      <div className="flex gap-4 flex-wrap items-center justify-center">
+      <div className="flex gap-4 flex-wrap items-stretch justify-center">
         {tracks.map((track) => (
           <TrackInfo
             key={track.id}
             track={track.trackName}
             artist={track.artistName}
             image={track.image}
-            footerContent={
-              <Button
-                className="bg-[#FF0000]  rounded-md p-3  mt-2  text-center"
-                text="Remove track"
-                onClick={() => removeTrackHandler(track.id)}
-              />
-            }
+            onRemove={() => removeTrackHandler(track.id)}
+            showRemoveButton
           />
         ))}
       </div>
@@ -65,7 +60,7 @@ const AddTracks = () => {
         </p>
       ) : null}
       <Button
-        className="bg-tertiary w-[200px] rounded-md py-2  w-full text-center"
+        className="bg-tertiary !w-[200px] rounded-md py-2  w-full text-center"
         text="Add track"
         onClick={addTrackHandler}
       />

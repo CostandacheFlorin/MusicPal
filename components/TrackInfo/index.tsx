@@ -1,3 +1,4 @@
+import XSymbol from "@/assets/svgs/X-Symbol";
 import Button from "../Button";
 
 interface TrackInfoProps {
@@ -7,6 +8,8 @@ interface TrackInfoProps {
   imageWidth?: number;
   imageHeight?: number;
   footerContent?: React.ReactNode;
+  showRemoveButton?: boolean;
+  onRemove?: any;
 }
 
 const TrackInfo: React.FC<TrackInfoProps> = ({
@@ -16,9 +19,11 @@ const TrackInfo: React.FC<TrackInfoProps> = ({
   imageWidth = 150,
   imageHeight = 150,
   footerContent,
+  showRemoveButton,
+  onRemove,
 }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center px-8   relative hover:bg-[#303030]">
       <div className="flex justify-center gap-3 items-center">
         <img
           className="rounded-full"
@@ -32,6 +37,14 @@ const TrackInfo: React.FC<TrackInfoProps> = ({
           {footerContent}
         </div>
       </div>
+      {showRemoveButton ? (
+        <XSymbol
+          onClick={onRemove}
+          width="20px"
+          height="20px"
+          className="absolute hover:cursor-pointer text-white top-[10px] right-[10px]"
+        />
+      ) : null}
     </div>
   );
 };

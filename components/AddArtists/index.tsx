@@ -21,19 +21,14 @@ const AddArtists = () => {
       <p className="mb-2 text-textPrimary pl-3 font-bold text-center text-lg">
         Artists
       </p>
-      <div className="flex gap-4 flex-wrap items-center justify-center">
+      <div className="flex gap-4 flex-wrap items-stretch justify-center">
         {artists.map((artist) => (
           <ArtistInfo
             key={artist.id}
             artist={artist.artistName}
             image={artist.image}
-            footerContent={
-              <Button
-                className="bg-[#FF0000]  rounded-md p-3  mt-2  text-center"
-                text="Remove artist"
-                onClick={() => removeArtistHandler(artist.id)}
-              />
-            }
+            onRemove={() => removeArtistHandler(artist.id)}
+            showRemoveButton
           />
         ))}
       </div>
@@ -48,7 +43,7 @@ const AddArtists = () => {
         onChange={setArtistSeedName}
       />
       <Button
-        className="bg-tertiary w-[200px] rounded-md py-2  w-full text-center"
+        className="bg-tertiary !w-[200px] rounded-md py-2  w-full text-center"
         text="Add artist"
         onClick={addArtistHandler}
       />
