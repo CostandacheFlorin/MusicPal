@@ -1,12 +1,23 @@
 "use client";
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 
 import RecommendationContext from "./RecommendationContext";
+import { BasicTrack, BasicArtist } from "@/hooks/useRecommendationsConfig";
+import { getRecommendationSettingsFromLocalStorage } from "@/utils";
+export interface RecommendationSettingsProps {
+  tracks: BasicTrack[];
+  artists: BasicArtist[];
+  genres: string[];
+  popularity: string;
+}
 
 const RecommendationProvider = ({ children }: { children: ReactNode }) => {
-  const [recommendationSettings, setRecommendationSettings] = useState({
-    test: "asd",
-  });
+  const [recommendationSettings, setRecommendationSettings] =
+    useState<RecommendationSettingsProps>(
+      getRecommendationSettingsFromLocalStorage()
+    );
+
+  console.log(recommendationSettings);
 
   const contextValue = useMemo(
     () => ({

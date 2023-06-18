@@ -40,8 +40,8 @@ const TrackInfo: React.FC<TrackInfoProps> = ({
       {showRemoveButton ? (
         <XSymbol
           onClick={onRemove}
-          width="20px"
-          height="20px"
+          width="15px"
+          height="15px"
           className="absolute hover:cursor-pointer text-white top-[10px] right-[10px]"
         />
       ) : null}

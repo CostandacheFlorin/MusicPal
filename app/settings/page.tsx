@@ -18,7 +18,7 @@ const Recommend = () => {
     fetchingErrors,
   } = useRecommendationsConfig();
   return (
-    <div className="min-h-[100vh] h-full flex flex-col bg-primary items-center">
+    <div className="min-h-[100vh] h-full flex flex-col bg-primary items-center pb-[4.5rem]">
       <h2 className=" w-full p-4 text-white text-center text-2xl">
         Configure your recommendations settings
       </h2>

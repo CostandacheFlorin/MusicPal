@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { RadioChangeEvent } from "antd";
 import { DefaultOptionType } from "antd/es/select";
 import { useQuery } from "react-query";
@@ -6,21 +6,29 @@ import { getGenresList } from "@/actions/utils.action";
 import { convertToDropdownOptions } from "@/helpers";
 import { getArtistInfo, getTrackInfo } from "@/actions/search.action";
 import { useRecommendationContext } from "@/providers/RecommendationContext";
-interface BasicTrack {
+
+export interface BasicTrack {
   id: string;
   trackName: string;
   artistName: string;
   image: string;
 }
-interface BasicArtist {
+export interface BasicArtist {
   artistName: string;
   image: string;
   id: string;
 }
 
 export const useRecommendationsConfig = () => {
-  const [tracks, setTracks] = useState<BasicTrack[]>([]);
-  const [artists, setArtists] = useState<BasicArtist[]>([]);
+  const { recommendationSettings, setRecommendationSettings } =
+    useRecommendationContext();
+
+  const [tracks, setTracks] = useState<BasicTrack[]>([
+    ...recommendationSettings.tracks,
+  ]);
+  const [artists, setArtists] = useState<BasicArtist[]>([
+    ...recommendationSettings.artists,
+  ]);
   const [trackName, setTrackName] = useState<string>("");
   const [artistName, setArtistName] = useState<string>("");
   const [artistSeedName, setArtistSeedName] = useState<string>("");
@@ -35,12 +43,10 @@ export const useRecommendationsConfig = () => {
     setRecommendationsSettings: { hasError: false, errorMessage: "" },
   });
   const [genresOptions, setGenresOptions] = useState<DefaultOptionType[]>([]);
-  const [genres, setGenres] = useState<string[]>([]);
-  const [popularity, setPopularity] = useState("");
-
-  const { recommendationSettings, setRecommendationSettings } =
-    useRecommendationContext();
-  console.log(recommendationSettings);
+  const [genres, setGenres] = useState<string[]>(recommendationSettings.genres);
+  const [popularity, setPopularity] = useState(
+    recommendationSettings.popularity
+  );
 
   const { error: genresFetchingError, refetch: refetchGenres } = useQuery(
     "getGenresList",
@@ -210,6 +216,10 @@ export const useRecommendationsConfig = () => {
   };
 
   const submitRecommendation = () => {
+    console.log("tracks", tracks);
+    console.log("artists", artists);
+    console.log("genres", genres);
+
     if (tracks.length + artists.length + genres.length > 5) {
       setFetchingErrors({
         ...fetchingErrors,
@@ -223,6 +233,14 @@ export const useRecommendationsConfig = () => {
 
       return;
     }
+    const newSettings = {
+      tracks,
+      artists,
+      genres,
+      popularity,
+    };
+    setRecommendationSettings(newSettings);
+    localStorage.setItem("recommendationSettings", JSON.stringify(newSettings));
 
     setFetchingErrors({
       ...fetchingErrors,

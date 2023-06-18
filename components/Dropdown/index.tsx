@@ -70,7 +70,6 @@ const Dropdown = ({
   };
 
   const handleOptionClick = (option: DropdownOption) => {
-    console.log(option);
     onChange(option.value);
     setDropdownValue(option.value);
     setDropdownLabel(option.label);
@@ -78,9 +77,6 @@ const Dropdown = ({
     setSearchText("");
     setIsOpen(false);
   };
-  console.log(searchText);
-  console.log("drop value", dropdownValue);
-  console.log("drop label", dropdownLabel);
 
   const handleSearch = (e: any) => {
     setDropdownLabel(e.target.value);
