@@ -11,7 +11,6 @@ const Navigation = () => {
         <Link href="/discover">
           <div className="hover:text-tertiary">Discover</div>
         </Link>
-
         <Link href="/blog">
           <div className="hover:text-tertiary">Login</div>
         </Link>
