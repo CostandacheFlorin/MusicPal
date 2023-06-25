@@ -4,7 +4,7 @@ import TrackRecommendation from "@/components/TrackRecommendation";
 
 const Discover = () => {
   return (
-    <div className=" bg-[#121212] h-[880px]">
+    <div className=" bg-[#121212] h-screen overflow-y-hidden">
       <TrackRecommendation
         onScrollingDown={() => {
           console.log("Down");
