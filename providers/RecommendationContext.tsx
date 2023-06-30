@@ -1,10 +1,21 @@
 import { createContext, useContext } from "react";
-import { RecommendationSettingsProps } from "./RecommendationProvider";
+import {
+  RecommendationSettingsProps,
+  RecommendedTrackItem,
+} from "./RecommendationProvider";
 
 interface RecommendationContextProps {
   recommendationSettings: RecommendationSettingsProps;
   setRecommendationSettings: React.Dispatch<
     React.SetStateAction<RecommendationSettingsProps>
+  >;
+  recommendedTracks: RecommendedTrackItem[];
+  setRecommendedTracks: React.Dispatch<
+    React.SetStateAction<RecommendedTrackItem[]>
+  >;
+  currentRecommendedTrack: RecommendedTrackItem | null;
+  setCurrentRecommendedTrack: React.Dispatch<
+    React.SetStateAction<RecommendedTrackItem | null>
   >;
 }
 

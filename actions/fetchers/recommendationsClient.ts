@@ -9,15 +9,17 @@ export const getRecommendations = (
 ) => {
   const params = new URLSearchParams();
 
-  if (tracks?.length > 0) {
-    params.append("tracks", tracks.join(","));
-  }
-  if (genres?.length > 0) {
-    params.append("genres", genres.join(","));
-  }
-  if (artists?.length > 0) {
-    params.append("artists", artists.join(","));
-  }
+  tracks.forEach((track) => {
+    params.append("tracks", track);
+  });
+
+  genres.forEach((genre) => {
+    params.append("genres", genre);
+  });
+
+  artists.forEach((artist) => {
+    params.append("artists", artist);
+  });
   params.append("popularity", popularity);
 
   const RECOMMENDATION_URL = `http://localhost:5000/recommendations/?${params.toString()}`;

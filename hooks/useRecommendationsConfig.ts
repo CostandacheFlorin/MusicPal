@@ -6,6 +6,7 @@ import { getGenresList } from "@/actions/utils.action";
 import { convertToDropdownOptions } from "@/helpers";
 import { getArtistInfo, getTrackInfo } from "@/actions/search.action";
 import { useRecommendationContext } from "@/providers/RecommendationContext";
+import { getTracksRecommendations } from "@/actions/recommendations.action";
 
 export interface BasicTrack {
   id: string;
@@ -20,8 +21,12 @@ export interface BasicArtist {
 }
 
 export const useRecommendationsConfig = () => {
-  const { recommendationSettings, setRecommendationSettings } =
-    useRecommendationContext();
+  const {
+    recommendationSettings,
+    setRecommendationSettings,
+    setRecommendedTracks,
+    setCurrentRecommendedTrack,
+  } = useRecommendationContext();
 
   const [tracks, setTracks] = useState<BasicTrack[]>([
     ...recommendationSettings.tracks,
@@ -165,6 +170,25 @@ export const useRecommendationsConfig = () => {
     }
   );
 
+  const { refetch: refetchRecommendedTracks } = useQuery(
+    "getRecommendedTracks",
+    async () =>
+      await getTracksRecommendations(
+        tracks.map((trackItem) => trackItem.id),
+        artists.map((artistItem) => artistItem.id),
+        genres,
+        popularity
+      ),
+    {
+      enabled: false,
+      refetchOnWindowFocus: false,
+      onSuccess: (tracksData) => {
+        setRecommendedTracks(tracksData);
+        setCurrentRecommendedTrack(tracksData[0]);
+      },
+    }
+  );
+
   const addTrackHandler = () => {
     if (trackName.trim() === "") {
       setAddTrackErrors({ ...addTrackErrors, trackName: true });
@@ -241,7 +265,7 @@ export const useRecommendationsConfig = () => {
     };
     setRecommendationSettings(newSettings);
     localStorage.setItem("recommendationSettings", JSON.stringify(newSettings));
-
+    refetchRecommendedTracks();
     setFetchingErrors({
       ...fetchingErrors,
       setRecommendationsSettings: {
@@ -275,5 +299,6 @@ export const useRecommendationsConfig = () => {
     setArtistSeedName,
     addArtistHandler,
     fetchingErrors,
+    refetchRecommendedTracks,
   };
 };
