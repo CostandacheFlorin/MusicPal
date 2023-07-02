@@ -46,9 +46,7 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
   const [currentRecommendedTrack, setCurrentRecommendedTrack] =
     useState<RecommendedTrackItem | null>(null);
 
-  console.log(recommendationSettings);
-  console.log(recommendedTracks);
-  console.log(currentRecommendedTrack);
+  console.log("recommendationSettings", recommendationSettings);
   const contextValue = useMemo(
     () => ({
       recommendationSettings,

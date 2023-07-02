@@ -235,12 +235,29 @@ export const useRecommendationsConfig = () => {
     const filteredArtists = artists.filter(
       (artistItem) => artistItem.id !== id
     );
+    console.log(filteredArtists);
+
+    const newSettings = {
+      tracks,
+      artists: filteredArtists,
+      genres,
+      popularity,
+    };
+    console.log(newSettings);
+    setRecommendationSettings(newSettings);
+    localStorage.setItem("recommendationSettings", JSON.stringify(newSettings));
     setArtists(filteredArtists);
   };
   const onChangeRadio = (e: RadioChangeEvent) => {
     setPopularity(e.target.value);
   };
 
+  console.log("dataInComponent", {
+    tracks,
+    artists,
+    genres,
+    popularity,
+  });
   const submitRecommendation = () => {
     console.log("tracks", tracks);
     console.log("artists", artists);

@@ -20,7 +20,6 @@ const Discover = () => {
         recommendedTrackItem.id === currentRecommendedTrack.id
     );
 
-    console.log(currentPosition);
     if (direction === "UP") {
       if (currentPosition === 0) {
         return;
