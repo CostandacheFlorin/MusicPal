@@ -3,7 +3,6 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 
 import RecommendationContext from "./RecommendationContext";
 import { BasicTrack, BasicArtist } from "@/hooks/useRecommendationsConfig";
-import { getRecommendationSettingsFromLocalStorage } from "@/utils";
 export interface RecommendationSettingsProps {
   tracks: BasicTrack[];
   artists: BasicArtist[];
@@ -17,6 +16,24 @@ export interface RecommendedTrackItem {
   image: string;
   artists: string;
 }
+export const getRecommendationSettingsFromLocalStorage = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+  const savedRecommendationSettings = localStorage.getItem(
+    "recommendationSettings"
+  );
+  if (savedRecommendationSettings) {
+    return JSON.parse(savedRecommendationSettings);
+  } else {
+    return {
+      tracks: [],
+      artists: [],
+      genres: [],
+      popularity: "high",
+    };
+  }
+};
 
 const RecommendationProvider = ({ children }: { children: ReactNode }) => {
   const [recommendationSettings, setRecommendationSettings] =

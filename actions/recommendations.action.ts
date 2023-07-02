@@ -6,6 +6,7 @@ export const getTracksRecommendations = async (
   genres: string[],
   popularity: string
 ) => {
+  console.log("tracks", tracks);
   const recommendedTracks = await getRecommendations(
     tracks,
     artists,

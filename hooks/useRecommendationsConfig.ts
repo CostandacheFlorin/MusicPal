@@ -28,12 +28,12 @@ export const useRecommendationsConfig = () => {
     setCurrentRecommendedTrack,
   } = useRecommendationContext();
 
-  const [tracks, setTracks] = useState<BasicTrack[]>([
-    ...recommendationSettings.tracks,
-  ]);
-  const [artists, setArtists] = useState<BasicArtist[]>([
-    ...recommendationSettings.artists,
-  ]);
+  const [tracks, setTracks] = useState<BasicTrack[]>(
+    recommendationSettings?.tracks || []
+  );
+  const [artists, setArtists] = useState<BasicArtist[]>(
+    recommendationSettings?.artists || []
+  );
   const [trackName, setTrackName] = useState<string>("");
   const [artistName, setArtistName] = useState<string>("");
   const [artistSeedName, setArtistSeedName] = useState<string>("");
@@ -48,9 +48,11 @@ export const useRecommendationsConfig = () => {
     setRecommendationsSettings: { hasError: false, errorMessage: "" },
   });
   const [genresOptions, setGenresOptions] = useState<DefaultOptionType[]>([]);
-  const [genres, setGenres] = useState<string[]>(recommendationSettings.genres);
+  const [genres, setGenres] = useState<string[]>(
+    recommendationSettings?.genres || []
+  );
   const [popularity, setPopularity] = useState(
-    recommendationSettings.popularity
+    recommendationSettings?.popularity || "high"
   );
 
   const { error: genresFetchingError, refetch: refetchGenres } = useQuery(
