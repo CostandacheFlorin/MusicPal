@@ -8,6 +8,7 @@ import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
 import AddTracks from "@/components/AddTracks";
 import AddArtists from "@/components/AddArtists";
 const Recommend = () => {
+  // TODO Split the logic
   const {
     onChangeRadio,
     genresOptions,
@@ -16,6 +17,19 @@ const Recommend = () => {
     popularity,
     submitRecommendation,
     fetchingErrors,
+    removeArtistHandler,
+    artists,
+    artistSeedName,
+    setArtistSeedName,
+    addArtistHandler,
+    addTrackErrors,
+    addTrackHandler,
+    tracks,
+    artistName,
+    setArtistName,
+    removeTrackHandler,
+    trackName,
+    setTrackName,
   } = useRecommendationsConfig();
   return (
     <div className="min-h-[100vh] h-full flex flex-col bg-primary items-center pb-[4.5rem]">
@@ -32,8 +46,25 @@ const Recommend = () => {
       </div>
 
       <div className="w-full flex flex-col gap-4 items-center justify-center ">
-        <AddTracks />
-        <AddArtists />
+        <AddTracks
+          addTrackHandler={addTrackHandler}
+          artistName={artistName}
+          setArtistName={setArtistName}
+          addTrackErrors={addTrackErrors}
+          tracks={tracks}
+          removeTrackHandler={removeTrackHandler}
+          fetchingErrors={fetchingErrors}
+          trackName={trackName}
+          setTrackName={setTrackName}
+        />
+        <AddArtists
+          setArtistSeedName={setArtistSeedName}
+          addArtistHandler={addArtistHandler}
+          artistSeedName={artistSeedName}
+          fetchingErrors={fetchingErrors}
+          artists={artists}
+          removeHandler={removeArtistHandler}
+        />
         <div className="flex flex-col gap-4 ">
           <div className="flex flex-col justify-center items-center">
             <p className=" text-textPrimary text-center text-lg">Genres</p>

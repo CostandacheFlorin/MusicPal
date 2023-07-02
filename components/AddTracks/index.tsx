@@ -2,20 +2,30 @@ import { useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
 import TrackInfo from "../TrackInfo";
-import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
+import { BasicTrack } from "@/hooks/useRecommendationsConfig";
 
-const AddTracks = () => {
-  const {
-    tracks,
-    trackName,
-    setTrackName,
-    setArtistName,
-    artistName,
-    addTrackErrors,
-    addTrackHandler,
-    fetchingErrors,
-    removeTrackHandler,
-  } = useRecommendationsConfig();
+interface AddTracksProps {
+  removeTrackHandler: (trackId: string) => void;
+  tracks: BasicTrack[];
+  fetchingErrors: any;
+  trackName: string;
+  setTrackName: (trackName: string) => void;
+  addTrackHandler: () => void;
+  addTrackErrors: { trackName: boolean; artistName: boolean };
+  artistName: string;
+  setArtistName: (artistName: string) => void;
+}
+const AddTracks = ({
+  removeTrackHandler,
+  tracks,
+  fetchingErrors,
+  trackName,
+  setTrackName,
+  addTrackHandler,
+  addTrackErrors,
+  artistName,
+  setArtistName,
+}: AddTracksProps) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <p className="mb-2 text-textPrimary text-lg font-bold pl-3 text-center">
