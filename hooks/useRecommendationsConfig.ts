@@ -187,6 +187,11 @@ export const useRecommendationsConfig = () => {
       onSuccess: (tracksData) => {
         setRecommendedTracks(tracksData);
         setCurrentRecommendedTrack(tracksData[0]);
+        localStorage.setItem("recommendedTracks", JSON.stringify(tracksData));
+        localStorage.setItem(
+          "currentRecommendedTrack",
+          JSON.stringify(tracksData[0])
+        );
       },
     }
   );
@@ -206,6 +211,15 @@ export const useRecommendationsConfig = () => {
   const removeTrackHandler = (id: string) => {
     const filteredTracks = tracks.filter((trackItem) => trackItem.id !== id);
     setTracks(filteredTracks);
+
+    const newSettings = {
+      tracks: filteredTracks,
+      artists,
+      genres,
+      popularity,
+    };
+    setRecommendationSettings(newSettings);
+    localStorage.setItem("recommendationSettings", JSON.stringify(newSettings));
   };
 
   const handleTagsChange = (value: any) => {
@@ -284,6 +298,7 @@ export const useRecommendationsConfig = () => {
     };
     setRecommendationSettings(newSettings);
     localStorage.setItem("recommendationSettings", JSON.stringify(newSettings));
+
     refetchRecommendedTracks();
     setFetchingErrors({
       ...fetchingErrors,

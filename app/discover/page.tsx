@@ -1,7 +1,10 @@
 "use client";
 
 import TrackRecommendation from "@/components/TrackRecommendation";
+import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
 import { useRecommendationContext } from "@/providers/RecommendationContext";
+
+const NUMBER_OF_SONGS_LEFT = 3;
 
 const Discover = () => {
   const {
@@ -9,6 +12,7 @@ const Discover = () => {
     setCurrentRecommendedTrack,
     recommendedTracks,
   } = useRecommendationContext();
+  const { refetchRecommendedTracks } = useRecommendationsConfig();
 
   if (!currentRecommendedTrack?.id) {
     return <div>You need to setup your discovery settings!</div>;
@@ -25,11 +29,22 @@ const Discover = () => {
         return;
       }
       setCurrentRecommendedTrack(recommendedTracks[currentPosition - 1]);
+      localStorage.setItem(
+        "currentRecommendedTrack",
+        JSON.stringify(recommendedTracks[currentPosition - 1])
+      );
       return;
     }
     if (currentPosition === recommendedTracks.length - 1) {
       return;
     }
+    if (currentPosition === recommendedTracks.length - NUMBER_OF_SONGS_LEFT) {
+      refetchRecommendedTracks();
+    }
+    localStorage.setItem(
+      "currentRecommendedTrack",
+      JSON.stringify(recommendedTracks[currentPosition + 1])
+    );
     setCurrentRecommendedTrack(recommendedTracks[currentPosition + 1]);
   };
   return (

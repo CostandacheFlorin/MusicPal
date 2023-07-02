@@ -35,6 +35,30 @@ export const getRecommendationSettingsFromLocalStorage = () => {
   }
 };
 
+export const getRecommendedTracksFromLocalStorage = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+  const savedRecommendedTracks = localStorage.getItem("recommendedTracks");
+  if (savedRecommendedTracks) {
+    return JSON.parse(savedRecommendedTracks);
+  } else {
+    return [];
+  }
+};
+
+export const getCurrentRecommendedTrackFromLocalStorage = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+  const savedRecommendedTrack = localStorage.getItem("currentRecommendedTrack");
+  if (savedRecommendedTrack) {
+    return JSON.parse(savedRecommendedTrack);
+  } else {
+    return null;
+  }
+};
+
 const RecommendationProvider = ({ children }: { children: ReactNode }) => {
   const [recommendationSettings, setRecommendationSettings] =
     useState<RecommendationSettingsProps>(
@@ -42,9 +66,11 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
     );
   const [recommendedTracks, setRecommendedTracks] = useState<
     RecommendedTrackItem[]
-  >([]);
+  >(getRecommendedTracksFromLocalStorage());
   const [currentRecommendedTrack, setCurrentRecommendedTrack] =
-    useState<RecommendedTrackItem | null>(null);
+    useState<RecommendedTrackItem | null>(
+      getCurrentRecommendedTrackFromLocalStorage()
+    );
 
   console.log("recommendationSettings", recommendationSettings);
   const contextValue = useMemo(
