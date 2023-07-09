@@ -21,6 +21,7 @@ export interface RecommendedTrackItem {
   release_date: string;
   image: string;
   artists: string;
+  artistId: string;
 }
 
 export interface SavedItemType {
@@ -89,8 +90,6 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
   const [savedPlaylists, setSavedPlaylists] = useState([]);
   const [followedArtists, setFollowedArtists] = useState([]);
 
-  console.log("recommendationSettings", recommendationSettings);
-  console.log("loggedIn", isLoggedIn);
   useEffect(() => {
     if (localStorage.getItem("userData")) {
       setIsLoggedIn(true);
@@ -111,10 +110,6 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
       refetchSavedTracks();
     }
   }, [isLoggedIn]);
-  console.log(userToken);
-  console.log(savedTracks);
-  console.log(savedPlaylists);
-  console.log(followedArtists);
   const { refetch: refetchSavedTracks } = useQuery(
     "getSavedTracks",
     async () =>

@@ -7,6 +7,7 @@ import { convertToDropdownOptions } from "@/helpers";
 import { getArtistInfo, getTrackInfo } from "@/actions/search.action";
 import { useRecommendationContext } from "@/providers/RecommendationContext";
 import { getTracksRecommendations } from "@/actions/recommendations.action";
+import { toast } from "react-toastify";
 
 export interface BasicTrack {
   id: string;
@@ -106,8 +107,11 @@ export const useRecommendationsConfig = () => {
             errorMessage: "",
           },
         });
+        toast.success("Added a new track");
       },
       onError: (error) => {
+        toast.error("Failed getting the track, try again!");
+
         setFetchingErrors({
           ...fetchingErrors,
           getTrack: {
@@ -158,8 +162,11 @@ export const useRecommendationsConfig = () => {
             errorMessage: "",
           },
         });
+        toast.success("Added a new artist");
       },
       onError: (error) => {
+        toast.error("Failed getting the artist, try again!");
+
         setFetchingErrors({
           ...fetchingErrors,
           getArtist: {
@@ -277,6 +284,9 @@ export const useRecommendationsConfig = () => {
         errorMessage: "",
       },
     });
+    toast.success(
+      "Created a new discovery queue! Go to the discovery page to check them out!"
+    );
   };
 
   return {

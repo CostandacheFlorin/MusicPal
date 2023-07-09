@@ -9,7 +9,7 @@ interface Props {
   tooltipText?: string;
 }
 
-const Heart: React.FC<Props> = ({
+const UnfollowArtist: React.FC<Props> = ({
   onClick,
   width = "50px",
   height = "50px",
@@ -59,4 +59,4 @@ const Heart: React.FC<Props> = ({
   );
 };
 
-export default Heart;
+export default UnfollowArtist;

@@ -68,7 +68,6 @@ export const saveInPlaylist = async ({
 };
 
 export const getSavedTracks = async (userId: string) => {
-  console.log("userId din action", userId);
   const savedTracks = await getSavedTracksForUser(userId);
   return savedTracks.data;
 };

@@ -57,6 +57,7 @@ const Discover = () => {
           changeTrackHandler("UP");
         }}
         trackId={currentRecommendedTrack.id}
+        artistId={currentRecommendedTrack.artistId}
       />
     </div>
   );

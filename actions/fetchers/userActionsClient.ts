@@ -1,34 +1,46 @@
 import axios from "axios";
 
 export const putSaveTrack = (trackId: string, userId: string) => {
-  return axios.put("http://localhost:5000/user-actions/save-track", {
-    trackId,
-    userId,
-  });
-};
-export const deleteUnsaveTrack = (trackId: string, userId: string) => {
-  return axios.delete("http://localhost:5000/user-actions/unsave-track", {
-    data: {
+  return axios.put(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/save-track`,
+    {
       trackId,
       userId,
-    },
-  });
+    }
+  );
+};
+export const deleteUnsaveTrack = (trackId: string, userId: string) => {
+  return axios.delete(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/unsave-track`,
+    {
+      data: {
+        trackId,
+        userId,
+      },
+    }
+  );
 };
 
 export const putFollowArtist = (artistId: string, userId: string) => {
-  return axios.put("http://localhost:5000/user-actions/follow-artist", {
-    artistId,
-    userId,
-  });
+  return axios.put(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/follow-artist`,
+    {
+      artistId,
+      userId,
+    }
+  );
 };
 
 export const deleteUnfollowArtist = (artistId: string, userId: string) => {
-  return axios.delete("http://localhost:5000/user-actions/follow-artist", {
-    data: {
-      artistId,
-      userId,
-    },
-  });
+  return axios.delete(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/unfollow-artist`,
+    {
+      data: {
+        artistId,
+        userId,
+      },
+    }
+  );
 };
 
 export const postCreatePlaylist = ({
@@ -42,14 +54,17 @@ export const postCreatePlaylist = ({
   description: string;
   isPublic: boolean;
 }) => {
-  return axios.post("http://localhost:5000/user-actions/follow-artist", {
-    data: {
-      userId,
-      name,
-      description,
-      isPublic,
-    },
-  });
+  return axios.post(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/create-playlist`,
+    {
+      data: {
+        userId,
+        name,
+        description,
+        isPublic,
+      },
+    }
+  );
 };
 
 export const putSaveInPlaylist = ({
@@ -61,29 +76,32 @@ export const putSaveInPlaylist = ({
   userId: string;
   playlistId: string;
 }) => {
-  return axios.put("http://localhost:5000/user-actions/save-in-playlist", {
-    data: {
-      trackId,
-      userId,
-      playlistId,
-    },
-  });
+  return axios.put(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/save-in-playlist`,
+    {
+      data: {
+        trackId,
+        userId,
+        playlistId,
+      },
+    }
+  );
 };
 
 export const getSavedTracksForUser = (userId: string) => {
   return axios.get(
-    `http://localhost:5000/user-actions/get-saved-tracks/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-saved-tracks/${userId}`
   );
 };
 
 export const getFollowedArtistsForUser = (userId: string) => {
   return axios.get(
-    `http://localhost:5000/user-actions/get-followed-artists/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-followed-artists/${userId}`
   );
 };
 
 export const getPlaylistsForUser = (userId: string) => {
   return axios.get(
-    `http://localhost:5000/user-actions/get-playlists/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-playlists/${userId}`
   );
 };

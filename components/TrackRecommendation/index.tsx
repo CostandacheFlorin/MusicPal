@@ -9,12 +9,14 @@ interface TrackRecommendationProps {
   onScrollingUp: () => void;
   onScrollingDown: () => void;
   trackId: string;
+  artistId: string;
 }
 
 const TrackRecommendation: React.FC<TrackRecommendationProps> = ({
   onScrollingUp,
   onScrollingDown,
   trackId,
+  artistId,
 }) => {
   const onWheelHandler = (e: any) => {
     if (e.deltaY < 0) {
@@ -44,7 +46,7 @@ const TrackRecommendation: React.FC<TrackRecommendationProps> = ({
             src={`https://open.spotify.com/embed/track/${trackId}`}
           />
 
-          <TrackActions trackId={trackId} />
+          <TrackActions trackId={trackId} artistId={artistId} />
         </div>
       </div>
       <DownArrow
