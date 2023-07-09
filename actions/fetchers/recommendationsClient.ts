@@ -1,4 +1,3 @@
-import { BasicArtist, BasicTrack } from "@/hooks/useRecommendationsConfig";
 import axios from "axios";
 
 export const getRecommendations = (

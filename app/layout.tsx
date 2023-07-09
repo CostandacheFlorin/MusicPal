@@ -20,12 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RecommendationProvider>
-          <QueryProvider>
+        <QueryProvider>
+          <RecommendationProvider>
             <Navigation />
             {children}
-          </QueryProvider>
-        </RecommendationProvider>
+          </RecommendationProvider>
+        </QueryProvider>
       </body>
     </html>
   );

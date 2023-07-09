@@ -2,6 +2,8 @@
 
 import DownArrow from "@/assets/svgs/DownArrow";
 import UpArrow from "@/assets/svgs/UpArrow";
+import { useRecommendationContext } from "@/providers/RecommendationContext";
+import TrackActions from "../TrackActions";
 
 interface TrackRecommendationProps {
   onScrollingUp: () => void;
@@ -41,9 +43,8 @@ const TrackRecommendation: React.FC<TrackRecommendationProps> = ({
             className="w-full h-full"
             src={`https://open.spotify.com/embed/track/${trackId}`}
           />
-          <p className="pb-[4rem] text-center text-white font-bold text-xl">
-            Login with spotify to access actions
-          </p>
+
+          <TrackActions trackId={trackId} />
         </div>
       </div>
       <DownArrow
