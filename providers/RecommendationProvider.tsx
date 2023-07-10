@@ -9,6 +9,7 @@ import {
   getPlaylists,
   getSavedTracks,
 } from "@/actions/userActions.action";
+import { getApiStatus } from "@/actions/utils.action";
 export interface RecommendationSettingsProps {
   tracks: BasicTrack[];
   artists: BasicArtist[];
@@ -73,6 +74,7 @@ export const getCurrentRecommendedTrackFromLocalStorage = () => {
 
 const RecommendationProvider = ({ children }: { children: ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAPIDown, setIsAPIDown] = useState(false);
   const [userToken, setUserToken] = useState("");
   const [recommendationSettings, setRecommendationSettings] =
     useState<RecommendationSettingsProps>(
@@ -124,6 +126,27 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
     }
   );
 
+  useQuery("getApiHealth", async () => await getApiStatus(), {
+    refetchOnWindowFocus: false,
+    refetchInterval: 5 * 60 * 1000,
+    onSuccess: (data) => {
+      if (data.success) {
+        setIsAPIDown(false);
+      } else {
+        setIsAPIDown(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 60000);
+      }
+    },
+    onError: () => {
+      setIsAPIDown(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 60000);
+    },
+  });
+
   const { refetch: refetchFollowedArtists } = useQuery(
     "getFollowedArtists",
     async () =>
@@ -172,6 +195,7 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
       refetchSavedTracks,
       refetchFollowedArtists,
       refetchPlaylists,
+      isAPIDown,
     }),
     [
       recommendationSettings,
@@ -182,6 +206,7 @@ const RecommendationProvider = ({ children }: { children: ReactNode }) => {
       savedTracks,
       savedPlaylists,
       followedArtists,
+      isAPIDown,
     ]
   );
 

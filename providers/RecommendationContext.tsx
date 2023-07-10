@@ -28,6 +28,7 @@ interface RecommendationContextProps {
   refetchSavedTracks: any;
   refetchFollowedArtists: any;
   refetchPlaylists: any;
+  isAPIDown: boolean;
 }
 
 const RecommendationContext = createContext<RecommendationContextProps | null>(

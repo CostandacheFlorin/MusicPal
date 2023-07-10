@@ -3,14 +3,21 @@ import { useRecommendationContext } from "@/providers/RecommendationContext";
 import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import ApiDown from "../ApiDown";
 
 const Navigation = () => {
-  const { isLoggedIn } = useRecommendationContext();
+  const { isLoggedIn, isAPIDown } = useRecommendationContext();
   return (
     <>
-      <nav className="p-4 w-full bg-primary border-b border-white flex justify-between">
-        <div className=" ml-4 text-white">Music Pal</div>
-        <ul className="text-white text-bold  flex gap-4 justify-end">
+      <nav className="p-2 w-full bg-primary border-b border-white flex justify-between">
+        <Link href="/">
+          <img
+            src="/musicpal-logo.png"
+            alt="Music Pal App"
+            className="ml-4 w-10 h-10 rounded-full"
+          />
+        </Link>
+        <ul className="text-white items-center text-bold  flex gap-4 justify-end">
           <Link href="/settings">
             <div className="hover:text-tertiary">Settings</div>
           </Link>
@@ -35,6 +42,7 @@ const Navigation = () => {
         </ul>
       </nav>
       <ToastContainer />
+      {isAPIDown ? <ApiDown /> : null}
     </>
   );
 };

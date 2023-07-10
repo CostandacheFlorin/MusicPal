@@ -263,8 +263,17 @@ export const useRecommendationsConfig = () => {
             "You can only provide 5 seed values! Please remove the extra seeds",
         },
       });
+      toast.error(
+        "You can only provide 5 seed values! Please remove the extra seeds"
+      );
+
       window.scrollTo(0, document.body.scrollHeight);
 
+      return;
+    }
+
+    if (tracks.length + artists.length + genres.length === 0) {
+      toast.error("You need to choose at least one track, artist or genre!");
       return;
     }
     const newSettings = {

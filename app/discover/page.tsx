@@ -1,5 +1,6 @@
 "use client";
 
+import NoMusicRecommendations from "@/components/NoMusicRecommendations";
 import TrackRecommendation from "@/components/TrackRecommendation";
 import { useRecommendationsConfig } from "@/hooks/useRecommendationsConfig";
 import { useRecommendationContext } from "@/providers/RecommendationContext";
@@ -15,7 +16,7 @@ const Discover = () => {
   const { refetchRecommendedTracks } = useRecommendationsConfig();
 
   if (!currentRecommendedTrack?.id) {
-    return <div>You need to setup your discovery settings!</div>;
+    return <NoMusicRecommendations />;
   }
 
   const changeTrackHandler = (direction: string) => {

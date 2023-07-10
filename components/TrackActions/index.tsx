@@ -33,7 +33,29 @@ const TrackActions = ({ trackId, artistId }: Props) => {
 
   if (!isLoggedIn) {
     return (
-      <p className="text-white text-xl">Login to have access to more actions</p>
+      <div className="flex flex-col items-center justify-center gap-2">
+        <p className="text-white text-xl">
+          Login to have access to more actions
+        </p>
+        <div className="flex gap-2">
+          <Heart color="red" width="40px" height="40px" tooltipText="Like" />
+          <AddToPlaylist color="#ffffff" tooltipText="Add to playlist" />
+
+          <FollowArtist
+            width="40px"
+            height="40px"
+            tooltipText="Follow"
+            color="#ffffff"
+            onClick={followArtistMutation}
+          />
+          <SpotifyIcon
+            tooltipText="Play on spotify"
+            width="40px"
+            height="40px"
+            onClick={handleRedirectToSpotify}
+          />
+        </div>
+      </div>
     );
   }
 

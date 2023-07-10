@@ -5,7 +5,11 @@ export const putSaveTrack = (trackId: string, userId: string) => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/save-track`,
     {
       trackId,
-      userId,
+    },
+    {
+      headers: {
+        Authorization: userId,
+      },
     }
   );
 };
@@ -15,7 +19,9 @@ export const deleteUnsaveTrack = (trackId: string, userId: string) => {
     {
       data: {
         trackId,
-        userId,
+      },
+      headers: {
+        Authorization: userId,
       },
     }
   );
@@ -26,7 +32,11 @@ export const putFollowArtist = (artistId: string, userId: string) => {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/follow-artist`,
     {
       artistId,
-      userId,
+    },
+    {
+      headers: {
+        Authorization: userId,
+      },
     }
   );
 };
@@ -37,7 +47,9 @@ export const deleteUnfollowArtist = (artistId: string, userId: string) => {
     {
       data: {
         artistId,
-        userId,
+      },
+      headers: {
+        Authorization: userId,
       },
     }
   );
@@ -58,10 +70,14 @@ export const postCreatePlaylist = ({
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/create-playlist`,
     {
       data: {
-        userId,
         name,
         description,
         isPublic,
+      },
+    },
+    {
+      headers: {
+        Authorization: userId,
       },
     }
   );
@@ -81,8 +97,12 @@ export const putSaveInPlaylist = ({
     {
       data: {
         trackId,
-        userId,
         playlistId,
+      },
+    },
+    {
+      headers: {
+        Authorization: userId,
       },
     }
   );
@@ -90,18 +110,33 @@ export const putSaveInPlaylist = ({
 
 export const getSavedTracksForUser = (userId: string) => {
   return axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-saved-tracks/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-saved-tracks`,
+    {
+      headers: {
+        Authorization: userId,
+      },
+    }
   );
 };
 
 export const getFollowedArtistsForUser = (userId: string) => {
   return axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-followed-artists/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-followed-artists`,
+    {
+      headers: {
+        Authorization: userId,
+      },
+    }
   );
 };
 
 export const getPlaylistsForUser = (userId: string) => {
   return axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-playlists/${userId}`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-playlists`,
+    {
+      headers: {
+        Authorization: userId,
+      },
+    }
   );
 };
