@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Music Pal
+## Music Pal is an intuitive app that tailors music recommendations specifically to your preferences. Whether you are in the mood for relaxing melodies or energetic beats, Music Pal has you covered.
 
-## Getting Started
+### Key Features
+* Customizable Settings: Adjust your preferences to receive music recommendations tailored to your tastes.
+* Smart Recommendations: Get personalized music recommendations based on your selected preferences.
+* No Need to Login: You can use the app without logging in with your Spotify account.
+* Integration with Spotify: Save tracks, add them to your playlists, or follow artists directly through our app.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## App Screens
+![frontend-1](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/f8cdf388-bfc9-4aea-92fb-a8f8e5b46090)
+![frontend-2](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/0793154b-7234-467d-9e14-b44577a8906b)
+![frontend-3](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/2f27a1a1-5e33-43fc-a11f-41173edefa48)
+![frontend-4](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/d387cc84-f2ca-4d76-8613-ee050f41b050)
+![frontend-5](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/5e5c75d2-3297-4c5b-be51-fa73fada56f6)
+![frontend-6](https://github.com/CostandacheFlorin/MusicPal/assets/96582084/a7d7507b-0820-4739-a0a5-f6a573714cca)
