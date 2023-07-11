@@ -23,6 +23,19 @@ export default function Home() {
               specifically to your preferences. Whether you are in the mood for
               relaxing melodies or energetic beats, Music Pal has you covered.
             </p>
+            <p className="text-[red] mt-2  font-bold">
+              Spotify makes it hard for hobbies to move out of dev mode. To
+              access the logged-in actions, please email me your Spotify email
+              to be added to the allowed list. Apologies for the inconvenience.
+              However, you still have access to music recommendations without
+              logging in.
+            </p>
+            <a
+              className=" font-bold"
+              href="mailto:costandacheflorinadrian@gmail.com"
+            >
+              Email me @ costandacheflorinadrian@gmail.com
+            </a>
           </div>
           <div className="flex items-center justify-center">
             <img
