@@ -121,7 +121,12 @@ export const getSavedTracksForUser = (userId: string) => {
 
 export const getFollowedArtistsForUser = (userId: string) => {
   return axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-followed-artists`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/user-actions/get-followed-artists`,
+    {
+      headers: {
+        Authorization: userId,
+      },
+    }
   );
 };
 
